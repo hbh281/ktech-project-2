@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update Article</title>
+</head>
+<body>
+<h1>Update Article</h1>
+<a th:href="@{/article/{id} (id=${article.id})}">Back to Articles</a>
+
+<hr>
+<form th:action="@{/article/{id}/update(id=${article.id})}" method ="post">
+    <div>
+        <label for="title-input">Title:</label>
+        <input type="text" id ="title-input" name = "title" th:value="${article.title}">
+    </div>
+    <div>
+        <label for="content-area">Content: </label>
+        <textarea id="content-area" name="content">[[${article.content}]]</textarea>
+    </div>
+    <div>
+        <label for="password-input">Password: </label>
+        <input type="text" id="password-input" name="password" th:value="${article.password}">
+    </div>
+    <div>
+        <label for="board">게시글 고르기:</label>
+        <select id="board" name="boardId">
+            <option th:each="board : ${boards}" th:value="${board.id}" th:text="${board.type}"></option>
+        </select>
+
+    </div>
+    <input type="submit" value="Update">
+</form>
+</body>
+</html>
