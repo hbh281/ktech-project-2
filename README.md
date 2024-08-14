@@ -1,5 +1,5 @@
 # ktech-project-2
-**필수 과제**
+**필수 과제**  
 :white_check_mark:게시판 관련 기능.  
 :white_check_mark:게시글 관련 기능.  
 :white_check_mark:댓글 관련 기능.  
