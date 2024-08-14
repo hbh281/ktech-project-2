@@ -20,7 +20,7 @@ public class ArticleController {
     // CREATE
     @GetMapping("/create")
     public String createView(Model model) {
-        List<Board> boards = boardService.findAll();
+        List<Board> boards = boardService.readAll();
         model.addAttribute("boards", boards);
         return "article/create.html";
     }
@@ -46,7 +46,7 @@ public class ArticleController {
     @GetMapping  // /articles
     public String readAll(Model model) {
         model.addAttribute("article", service.readAll());
-        return "article/home.html";
+        return "board/board.html";
     }
     //READ ONE
     @GetMapping("{id}")
@@ -65,7 +65,7 @@ public class ArticleController {
             Long id,
             Model model
     ) {
-        List<Board> boards = boardService.findAll();
+        List<Board> boards = boardService.readAll();
         model.addAttribute("boards", boards);
         model.addAttribute("article", service.readOne(id));
         return "article/update.html";

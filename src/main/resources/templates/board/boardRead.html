@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Board Details</title>
+</head>
+<body>
+<div>
+    <a href="/board">전체 게시판</a>
+    <a href="/board/1"> 자유 게시판</a>
+    <a href="/board/2"> 개발 게시판</a>
+    <a href="/board/3"> 일상생활 게시판</a>
+    <a href="/board/4"> 사고사건 게시판</a>
+</div>
+<hr>
+<h1>[[${board.type}]]</h1> <a href="/article/create">Write</a>
+<hr>
+<h3># Title </h3>
+<hr>
+<div th:each="article : ${articles}">
+    [[${article.id}]] <a th:href="@{/article/{id} (id = ${article.id})}">[[${article.title}]]</a>
+</div>
+</body>
+</html>

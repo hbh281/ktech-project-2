@@ -12,10 +12,10 @@ public class BoardService {
     public BoardService(BoardRepository boardRepo) {
         this.boardRepo = boardRepo;
     }
-    public List<Board> findAll() {
+    public List<Board> readAll() {
         return boardRepo.findAll();
     }
-    public Board findById(Long id) {
+    public Board readOne(Long id) {
         return boardRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Board not found"));
     }

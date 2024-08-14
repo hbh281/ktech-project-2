@@ -12,6 +12,7 @@
 <a href="/article">Back to Articles</a>
 <a th:href="@{/article/{id}/update (id=${article.id})}">Update</a>
 <form th:action="@{/article/{id}/delete (id=${article.id})}" method="post">
+    <label for="password-input"></label>
     <input type="text" name="password" id="password-input">
     <input type="submit" value="Delete">
 </form>
@@ -20,5 +21,34 @@
     [[${article.content}]]
 </p>
 <hr>
+<!-- 댓글 영역 -->
+<h2>Comments</h2>
+<!-- 댓글 작성 영역 -->
+<form th:action="@{/article/{id}/comments/create (id=${article.id})}" method = post>
+    <div>
+        <label for="comment-input">Comment:</label>
+        <input type="text" id = "comment-input" name ="content">
+    </div>
+    <div>
+        <label for="cPassword-input">Password:</label>
+        <input type="text" id="cPassword-input" name="cPassword">
+    </div>
+    <input type="submit" value="Write Comment">
+</form>
+<hr>
+<!-- 댓글 표시 영역 -->
+<!-- 댓글이 없을 경우 -->
+<div th:if="${article.comments.isEmpty()}">
+    <p>No Comments</p>
+</div>
+<div th:unless="${article.comments.isEmpty()}" th:each="comment : ${article.comments}">
+    <form th:action="@{/article/{articleId}/comments/{commentId}/delete(articleId=${article.id}, commentId=${comment.id})}" method="post">
+        <h2>익명:</h2>
+        <label for="commentPassword-input">Password:</label>
+        <input type="password" name="cPassword" id="commentPassword-input" required>
+        <input type="submit" value="Delete">
+        <p>[[${comment.content}]]</p>
+    </form>
+</div>
 </body>
 </html>

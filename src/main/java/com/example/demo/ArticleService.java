@@ -29,9 +29,12 @@ public class ArticleService {
         article.setBoardType(board);
         return repository.save(article);
     }
+    public List<Article> findByBoardTypeOrderByIdDesc(Board boardType) {
+        return repository.findByBoardTypeOrderByIdDesc(boardType);
+    }
     // Read All
     public List<Article> readAll() {
-        return repository.findAll();
+        return repository.findAllByOrderByIdDesc();
     }
 
     // Read One
