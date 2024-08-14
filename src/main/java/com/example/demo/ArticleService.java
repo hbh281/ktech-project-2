@@ -17,6 +17,20 @@ public class ArticleService {
         this.repository = repository;
         this.boardRepository = boardRepository;
     }
+    //next,prev article
+    public Article findPrev(Long id,Long boardId) {
+        return repository.findFirstByIdLessThanAndBoardType_IdOrderByIdDesc(id, boardId).orElse(null);
+    }
+    public Article findNext(Long id,Long boardId) {
+        return repository.findFirstByIdGreaterThanAndBoardType_IdOrderByIdDesc(id,boardId).orElse(null);
+    }
+    //next prev article all board
+    public Article findPrevAll(Long id) {
+        return repository.findFirstByIdGreaterThanOrderByIdDesc(id).orElse(null);
+    }
+    public Article findNextAll(Long id) {
+        return repository.findFirstByIdGreaterThanOrderByIdDesc(id).orElse(null);
+    }
 
     //Create
     public Article create(String title, String content, String password, Long boardId) {
@@ -69,8 +83,6 @@ public class ArticleService {
 
         if (password.equals(repository.findById(id).get().getPassword())) {
             repository.deleteById(id);
-        }else {
-            throw new RuntimeException("wrong pass!");
         }
     }
 }

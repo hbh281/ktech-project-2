@@ -1,25 +1,92 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>All Boards</title>
+    <meta charset="UTF-8" />
+    <title>Home Boards</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            margin: 1;
+            padding: 1;
+            background-color: #f4f4f4;
+        }
+        .write {
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+            display: inline-block;
+            margin-bottom: 20px;
+            color: white;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+            padding: 8px 16px;
+            display: inline-block;
+            text-decoration: underline;
+        }
+        a:hover {
+            background-color: #ddd;
+        }
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+        h2 {
+            background-color: #555;
+            color: #fff;
+            padding: 8px;
+            margin: 0;
+            display: flex;
+            justify-content: space-between;
+            max-width: 800px;
+            margin: 10px auto;
+        }
+        .article-list {
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 0;
+            list-style-type: none;
+        }
+        .article-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .article-item span {
+            flex: 1;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+<a href="/board">전체 게시판(All Boards)|</a>
+<a href="/board/1">자유 게시판(Free Board)|</a>
+<a href="/board/2">개발 게시판(Development Board)|</a>
+<a href="/board/3">일상 게시판(Daily Life Board)|</a>
+<a href="/board/4">사건사고 게시판(Incident Board)</a>
+<h1>전체 게시판</h1>
+<a class="write" href="/article/create">Write</a>
+<h2>
+    <span>#</span>
+    <span>Title</span>
+    <span>Board</span>
+</h2>
+<ul class="article-list" th:each="article:${articles}">
+    <li class="article-item">
+        <span th:text="${article.id}"></span>
+        <a th:href="@{/article/{articleId} (articleId=${article.id})}"
+        >[[${article.title}]]</a
+        >
 
-<a href="/board">전체 게시판</a>
-<a href="/board/1"> 자유 게시판</a>
-<a href="/board/2"> 개발 게시판</a>
-<a href="/board/3"> 일상생활 게시판</a>
-<a href="/board/4"> 사고사건 게시판</a>
-<hr>
-<!--전체 게시판 영역-->
-<h1>전체 게시판</h1> <a href="/article/create">Write</a>
-<hr>
-<div th:each="article : ${articles}">
-    [[${article.id}]] <a th:href="@{/article/{id} (id = ${article.id})}">[[${article.title}]]</a>
-</div>
+        <span th:text="${article.boardType.type}"></span>
+    </li>
+</ul>
 </body>
 </html>

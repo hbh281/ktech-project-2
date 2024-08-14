@@ -40,4 +40,17 @@ public class BoardController {
 
         return "board/boardread.html";
     }
+    @GetMapping("/article/{articleId}")
+    public String readOneArticle(
+            @PathVariable("articleId")
+            Long id,
+            Model model
+    ){
+        Article nextArticleAll=articleService.findNextAll(id);
+        Article prevArticleAll=articleService.findPrevAll(id);
+
+        model.addAttribute("nextArticleAll", nextArticleAll);
+        model.addAttribute("prevArticleAll", prevArticleAll);
+        return "board/articleread.html";
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.demo;
 
 
+import com.example.demo.model.Article;
 import com.example.demo.model.Board;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -55,6 +56,14 @@ public class ArticleController {
             Long id,
             Model model
     ) {
+        Article article = service.readOne(id);
+        Long boardId = article.getBoardType().getId();
+        Article nextArticle = service.findNext(id,boardId);
+        Article prevArticle = service.findPrev(id,boardId);
+
+
+        model.addAttribute("nextArticle",nextArticle);
+        model.addAttribute("prevArticle", prevArticle);
         model.addAttribute("article", service.readOne(id));
         return "article/read.html";
     }
@@ -96,6 +105,6 @@ public class ArticleController {
             String password
     ){
         service.delete(id,password);
-        return "redirect:/article/create";
+        return String.format("redirect:/article/%d", id);
     }
 }

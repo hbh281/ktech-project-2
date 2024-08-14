@@ -42,7 +42,7 @@ public class CommentService {
 
         if (cPassword.equals(comment.getPassword())) {
             commentRepo.delete(comment);
-        }else throw new RuntimeException("wrong pass");
+        }
 
     }
 

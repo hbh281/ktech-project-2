@@ -12,8 +12,8 @@
 <a href="/article">Back to Articles</a>
 <a th:href="@{/article/{id}/update (id=${article.id})} " >Update</a>
 
-<a th:href="@{/article/{id} (id = ${prevArticle.id})}" th:if="${prevArticle != null }">이전글</a>
-<a th:href="@{/article/{id} (id = ${nextArticle.id})}" th:if="${nextArticle != null}">다음글</a>
+<a th:href="@{/board/article/{id} (id = ${prevArticleAll.id})}" th:if="${prevArticle != null }">이전글</a>
+<a th:href="@{/board/article/{id} (id = ${nextArticleAll.id})}" th:if="${nextArticle != null}">다음글</a>
 
 <form th:action="@{/article/{id}/delete (id=${article.id})}" method="post">
     <label for="password-input"></label>
